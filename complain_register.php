@@ -5,37 +5,25 @@
 
 		$username=$_SESSION['username'];
 		$sub=$_POST['subject'];
-		$email='jyothsnasahij99@gmail.com';
+		$email='jyothsnashaji99@gmail.com';
 		$complain=$_POST['complain'];
 		$authority='MDDA';
 		$locality=$_POST['locality'];
 		$city=$_POST['city'];
-		
-		$file_name = $_FILES['image']['name']; 
-		$file_tmp =$_FILES['image']['tmp_name'];
-		$img_path="files/".$file_name;
-		move_uploaded_file($file_tmp,"files/".$file_name);
-			
-		$timezone = date_default_timezone_get();
-		$t= date_default_timezone_set('Asia/Kolkata'); 
-		$ar=explode('-',date('d-m-Y'));
-		$date=$ar[2]."-".$ar[1]."-".$ar[0];
+		 $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
-		do{
-			$flag=0;
-			$complain_id=rand(100,999).rand(100,999);
-			$sql="SELECT * FROM `complain` WHERE `complain_id`='$complain_id';";
-			$res=$conn->query($sql);
-			if(mysqli_num_rows($res)>0)
-			{
-				$flag=1;
-			}
-		}while($flag==1);
-
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
 		$upvote=0;
 		
-	
-		$sql="insert into complain (username,complain_id,complain, locality, city, authority,authority_mail,upvote,image_path,date,subject)  values ('$username','$complain_id','$complain','$locality','$city','$authority','$email','$upvote','$img_path','$date','$sub');";
+	 $image=basename( $_FILES["image"]["name"],".jpg");
+		$sql="insert into complain (username,complain, locality, city, authority,authority_mail,upvote,image_path,date,subject)  values ('$username','$complain','$locality','$city','$authority','$email','$upvote','$image','$date','$sub');";
 		$res=$conn->query($sql);
 		if($res>0)
 		{

@@ -43,7 +43,7 @@
 	{
 		$row=mysqli_fetch_assoc($result);
 		$city=$row['city'];                                      //Get user's city
-		$sql="SELECT * FROM `complain` WHERE `city`='$city' ORDER BY `date` DESC;";     //Display complains by date
+		$sql="SELECT * FROM `complain`  ORDER BY `date` DESC;";     //Display complains by date
 		$result=$conn->query($sql);
 		if(mysqli_num_rows($result)>0)
 		{	
@@ -66,7 +66,26 @@
 		}
 	}
     echo "<h2 style='text-align:center'>Events Near By</h2>";
-        
+      $sql="SELECT * FROM `events`  ORDER BY `date` DESC;";     //Display complains by date
+		$result=$conn->query($sql);
+		if(mysqli_num_rows($result)>0)
+		{	
+			
+			$flag=0;
+			while(($row=mysqli_fetch_assoc($result))&&$flag<10)       //Display latest 10 complains
+			{
+				echo "<div id='feed'>";
+				echo "<div style='float:left'><b>What?</b> : ".$row['event']."<br>";
+				echo "<b>Where</b> : ".$row['place']."<br>"; 
+				echo "<b>More</b> : ".$row['description']."<br>";
+				echo "<b>Host</b> :".$row['hosted_by']."<br></div>";
+				
+				$img_path=$row['image_path'];
+				echo "<div style='float:right'><img src='$img_path' height=120 width=150></div>"."<br>";
+				echo "</div>";
+				$flag+=1;
+			}
+		}  
 	
 
 	?>
