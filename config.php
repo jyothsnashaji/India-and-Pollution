@@ -12,3 +12,4 @@ if($conn->connect_error){
 }
 //Above connection can be made in procedural way as well.
 ?>
+
