@@ -10,85 +10,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width">
-	<meta name="description" content="India and Pollution">
-	<meta name="keywords" content="report pollution">
+	
 	<title>User</title>
 	<link rel="stylesheet" href="style.css">
-	<style type="text/css">
-		#feed{
-			border:1px solid black;
-			float:center
-			padding:20px;
-			margin:20px;
-			width:50%;
-			margin-left:350px;
-			height:110px;
-		}
-	</style>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/mystyles.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/myjs.js"></script> 	
 </head>
 <body>
 <?php include('header.php'); ?>
-    <h2>Hello, <?php echo $_SESSION['username'];?></h2>
-	<h3>HOME PAGE OF USER</h3>
+
     
-	<div style="margin-top: 100px">
-
-	<?php                                                      //Display Latest Complains in user's town
-    echo "<h2 style='text-align:center'>Issues Near By</h2>";
-	$username=$_SESSION['username'];                           
-	$sql="SELECT * FROM `user` WHERE `username`='$username';";
-	$result=$conn->query($sql);
-	if(mysqli_num_rows($result)>0)
-	{
-		$row=mysqli_fetch_assoc($result);
-		$city=$row['city'];                                      //Get user's city
-		$sql="SELECT * FROM `complain`  ORDER BY `date` DESC;";     //Display complains by date
-		$result=$conn->query($sql);
-		if(mysqli_num_rows($result)>0)
-		{	
-			
-			$flag=0;
-			while(($row=mysqli_fetch_assoc($result))&&$flag<10)       //Display latest 10 complains
-			{
-				echo "<div id='feed'>";
-				echo "<div style='float:left'><b>Complain Id</b> : ".$row['complain_id']."<br>";
-				echo "<b>Locality</b> : ".$row['locality']."<br>"; 
-				echo "<b>Subject</b> : ".$row['complain']."<br>";
-				echo "<b>Upvotes</b> :".$row['upvote']."<br>";
-				$cid=$row['complain_id'];
-				echo "<button><a href='vote.php?id=$cid'>View Complain</a></button ></div>";
-				$img_path=$row['image_path'];
-				echo "<div style='float:right'><img src='$img_path' height=120 width=150></div>"."<br>";
-				echo "</div>";
-				$flag+=1;
-			}
-		}
+	<div  class='row' style="margin-top: 100px">
+	<?php 
+	$sql="SELECT * FROM events ORDER BY date";
+	$res=mysqli_query($conn,$sql);
+	while($rr=mysqli_fetch_array($res))
+	{$image = $rr['image_path'];
+	$image_src = "upload/".$image;
+	echo "<div class='card' style='width:400px'>
+	<img class='card-img-top' src='";
+	echo $image_src;
+	echo "'  style='width:100%'>
+    <div class='card-body'>
+	  <h4 class='card-title'>";
+	echo $rr['event_name'];
+	echo "</h4>
+	  <p class='card-text'>";
+	  echo "Venue:";
+	  echo $rr['place'];
+	  echo "<br>Time:";
+	  echo $rr['date'];
+	  echo "<br>";
+	echo $rr['description'];
+	echo "</p>
+	  <a href='volunteer_reg.php?event_id=";
+	  echo $rr['event_id'];
+	  echo "' class='btn btn-primary' onclick='self.innerHTML=\'Registered\';'>Register As Volunteer</a>
+    </div>
+  </div>";
 	}
-    echo "<h2 style='text-align:center'>Events Near By</h2>";
-      $sql="SELECT * FROM `events`  ORDER BY `date` DESC;";     //Display complains by date
-		$result=$conn->query($sql);
-		if(mysqli_num_rows($result)>0)
-		{	
-			
-			$flag=0;
-			while(($row=mysqli_fetch_assoc($result))&&$flag<10)       //Display latest 10 complains
-			{
-				echo "<div id='feed'>";
-				echo "<div style='float:left'><b>What?</b> : ".$row['event']."<br>";
-				echo "<b>Where</b> : ".$row['place']."<br>"; 
-				echo "<b>More</b> : ".$row['description']."<br>";
-				echo "<b>Host</b> :".$row['hosted_by']."<br></div>";
-				
-				$img_path=$row['image_path'];
-				echo "<div style='float:right'><img src='$img_path' height=120 width=150></div>"."<br>";
-				echo "</div>";
-				$flag+=1;
-			}
-		}  
-	
-
-	?>
+  ?>
+  </div>
 	</div>
 </body>
 </html>

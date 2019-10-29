@@ -3,22 +3,18 @@
 
 	if(isset($_POST['Button']))
 	{
-		$firstname=$_POST['firstname'];
-		$lastname=$_POST['lastname'];
+	
 		$username=$_POST['username'];
 		$email=$_POST['email'];
 		$password=$_POST['password'];
 		$phone=$_POST['phoneNo'];
-		$age=$_POST['age'];
-		$gender=$_POST['gender'];
-		$address=$_POST['address'];
+		
 		$city=$_POST['city'];
-		$state=$_POST['state'];
-	}
+	}	
 
 	echo "$email";
 
-	$insert="insert into user (firstname,lastname,username,email,password,phone,age,gender,address,city,state)  values ('$firstname','$lastname','$username','$email','$password',$phone,$age,'$gender','$address','$city','$state');";
+	$insert="insert into user (username,email,password,phone,city)  values ('$username','$email','$password','$phone','$city')";
 	
 	
 	

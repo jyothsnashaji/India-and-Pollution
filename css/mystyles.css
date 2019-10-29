@@ -21,6 +21,6 @@ input[type=text], input[type=password] {
 }
 .comments
 {
-   padding-left: 30px;
-    background-color: azure;
+    margin-left: 10%;
+    
 }

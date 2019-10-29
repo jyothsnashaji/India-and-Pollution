@@ -8,6 +8,11 @@ body{
 	background-color:#f4f4f4;
 }
 
+
+.dp{
+	height:30px;
+	width:30px;
+}
 /*Global*/
 .container{
 	width: 80%;

@@ -31,8 +31,9 @@
     </form>
 </div>
 <br>
+
 <div class="container">
-	<?php $sql="SELECT * FROM post ORDER BY time";
+	<?php $sql="SELECT * FROM post ORDER BY time ASC";
 	$res=mysqli_query($conn,$sql);
 	echo "<table class='table table-hover'>";
 	if ($res)
@@ -41,21 +42,22 @@
 		{
 			echo "<tr class='collapserow' onclick='toggle_collapse(";
 			echo $rr['post_id'];
-			echo ")'><td ><div><b>";
+			echo ")'><td width='40px'><img  class='dp' src='images/avatar.png'></td><td> <div> <b>";
 			echo $rr['posted_by'];
 			echo "</b><br>  ";
 			echo $rr['post'];
+			
 			echo "</div></td></tr>
 			<tr id='collapse";
              echo $rr['post_id'];
-			 echo "' class='collapse comments' ><td><div >";
+			 echo "' class='collapse' ><td colspan=2><div  class='comments'>";
 			 $sql_comments="SELECT * FROM comments WHERE post_id=".$rr['post_id']."";
 			 $res_comments=mysqli_query($conn,$sql_comments);
 			 while($rr_c=mysqli_fetch_array($res_comments))
-			 {
-				 echo "<b>";
+			 { echo "<img  class='dp' src='images/avatar.png'> ";
+				 echo "<b>  ";
 				 echo $rr_c['commented_by'];
-				 echo "</b><br>";
+				 echo "</b>  ";
 				 echo $rr_c['comment'];
 				 echo "<hr>";
 

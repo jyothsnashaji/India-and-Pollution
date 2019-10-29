@@ -7,10 +7,7 @@
 				<ul>
 					<li><a href="user.php">HOME</a></li>
                     <li><a href="events.php">EVENTS</a></li>
-					<li><a href="complain.php">REPORT</a></li>
-					<li><a href="discussion.php">DISCUSS</a></li>
-					<li><a href="vote.php">UPVOTE</a></li>
-					<li><a href="history.php">HISTORY</a></li>
+					<li><a href="discussion.php">DISCUSS</a></li>			
 					<li><a href="logout.php">LOGOUT</a></li>
 				</ul>
 			</nav>

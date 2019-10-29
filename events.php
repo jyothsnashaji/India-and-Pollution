@@ -2,17 +2,22 @@
 session_start();
 if(!isset($_SESSION['username']))
     header('localhost:login.php');
+include_once('config.php')
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
         <title>Event Registeration</title>
-        <meta name="viewport" content="width=device-width">
-        <meta name="description" content="India and Pollution">
-        <meta name="keywords" content="report pollution">
+       
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" type="text/css" href="registration_complain.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/mystyles.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/myjs.js"></script> 	
     </head>
     <body>
 
@@ -23,7 +28,7 @@ if(!isset($_SESSION['username']))
 
             <table>
                 <tbody>
-                    <form action="event_register.php" method="post" enctype="multipart/form-data">
+                    <form action="event_register.php" method="post" enctype='multipart/form-data'>
 
                         <tr>
                             <td colspan="3"><h1>Event</h1></td></tr><br>
@@ -40,15 +45,30 @@ if(!isset($_SESSION['username']))
                         <td>   When?   : 		</td><td colspan="2"><input type="datetime-local" placeholder="Enter date and time" name="date" size="50"></td></tr><br>
                     <tr>
 
-                        <td>Image      : 		</td><td colspan="2"><input type="file" placeholder="Upload Image" name="image" size="50" ></td></tr><br>
+                        <td>Image      : 		</td><td colspan="2"><input type="file" placeholder="Upload Image" name="file" size="50" ></td></tr><br>
                     <tr>
 
                         <td colspan="3">
                             <input type="submit" name="submit" value="Register"></td>
 
                     </tr>
+                </form>
                 </tbody>
             </table>
         </div>
+    <div class='container'>
+My Events
+<?php 
+$sql="SELECT * FROM events WHERE hosted_by='".$_SESSION['username']."'";
+$res=mysqli_query($conn,$sql);
+while($rr=mysqli_fetch_array($res))
+{
+
+}
+?>
+
+    </div>
+
+
     </body>
 </html>
