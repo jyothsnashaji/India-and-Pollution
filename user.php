@@ -32,7 +32,7 @@
 	while($rr=mysqli_fetch_array($res))
 	{$image = $rr['image_path'];
 	$image_src = "upload/".$image;
-	echo "<div class='card' style='width:400px'>
+	echo "<div class='col-sm-4'><div class='card' style='width:400px'>
 	<img class='card-img-top' src='";
 	echo $image_src;
 	echo "'  style='width:100%'>
@@ -44,14 +44,23 @@
 	  echo "Venue:";
 	  echo $rr['place'];
 	  echo "<br>Time:";
-	  echo $rr['date'];
+	  echo date('F jS Y',strtotime($rr['date']));
 	  echo "<br>";
 	echo $rr['description'];
 	echo "</p>
 	  <a href='volunteer_reg.php?event_id=";
 	  echo $rr['event_id'];
-	  echo "' class='btn btn-primary' onclick='self.innerHTML=\'Registered\';'>Register As Volunteer</a>
-    </div>
+		echo "' class='btn btn-primary'>";
+		$sql_vol="SELECT username FROM volunteers WHERE event_id=".$rr['event_id']." AND username='".$_SESSION['username']."'";
+		$res_vol=mysqli_query($conn,$sql_vol);
+		
+		if (mysqli_num_rows($res_vol))
+		 echo "REGISTERED<span class='glyphicon glyphicon-check'></span>";
+		else 
+			echo "Register As Volunteer";
+		echo "</a>
+		</div>
+		</div>
   </div>";
 	}
   ?>

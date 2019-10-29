@@ -40,6 +40,9 @@
 	{
 		while($rr=mysqli_fetch_array($res))
 		{
+			$sql_comments="SELECT * FROM comments WHERE post_id=".$rr['post_id']."";
+			$res_comments=mysqli_query($conn,$sql_comments);
+			$count=mysqli_num_rows($res_comments);
 			echo "<tr class='collapserow' onclick='toggle_collapse(";
 			echo $rr['post_id'];
 			echo ")'><td width='40px'><img  class='dp' src='images/avatar.png'></td><td> <div> <b>";
@@ -47,7 +50,12 @@
 			echo "</b><br>  ";
 			echo $rr['post'];
 			
-			echo "</div></td></tr>
+			echo "</div>";
+			if ($count)
+			{echo "<br></r><span class='view_comments'>View ";
+			echo $count;
+			echo " comments</span>";}
+			echo "</td></tr>
 			<tr id='collapse";
              echo $rr['post_id'];
 			 echo "' class='collapse' ><td colspan=2><div  class='comments'>";

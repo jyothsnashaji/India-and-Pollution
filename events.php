@@ -31,7 +31,7 @@ include_once('config.php')
                     <form action="event_register.php" method="post" enctype='multipart/form-data'>
 
                         <tr>
-                            <td colspan="3"><h1>Event</h1></td></tr><br>
+                            <td colspan="3"><h1>Register Event</h1></td></tr><br>
 
                         <td>Event : 			</td><td colspan="2"><input type="text" placeholder="What is the Event" name="event" size="50"></td></tr><br>
                     <tr>
@@ -42,30 +42,25 @@ include_once('config.php')
                         <td>Venue: 		</td><td colspan="2"><input type="text" placeholder="Enter venue" name="place" size="50"></td></tr><br>
                     <tr>
 
-                        <td>   When?   : 		</td><td colspan="2"><input type="datetime-local" placeholder="Enter date and time" name="date" size="50"></td></tr><br>
+                        <td>   When?   : 		</td><td colspan="2"><input type="date" placeholder="Enter date" name="date" size="50"></td></tr><br>
                     <tr>
 
                         <td>Image      : 		</td><td colspan="2"><input type="file" placeholder="Upload Image" name="file" size="50" ></td></tr><br>
                     <tr>
 
                         <td colspan="3">
-                            <input type="submit" name="submit" value="Register"></td>
+                            <input type="submit" name="submit" value="Register"><br>
+                            <button class='button_'><a href='myevents.php'>My Events</a></button>
+                        </td>
+
 
                     </tr>
                 </form>
+               
                 </tbody>
             </table>
         </div>
-    <div class='container'>
-My Events
-<?php 
-$sql="SELECT * FROM events WHERE hosted_by='".$_SESSION['username']."'";
-$res=mysqli_query($conn,$sql);
-while($rr=mysqli_fetch_array($res))
-{
-
-}
-?>
+       
 
     </div>
 

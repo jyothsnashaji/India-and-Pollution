@@ -6,6 +6,6 @@
     echo $sql;
     if ($res)
     {
-        header('Location:events.php');
+        header('Location:user.php');
     }
     echo $conn->error;

@@ -1,7 +1,6 @@
 body{
     margin: 0;
     padding: 0;
-    background: url(https://s2.best-wallpaper.net/wallpaper/1920x1200/1303/Dresden-city-in-Germany-early-morning_1920x1200.jpg);
     background-size: cover;
     height: 100%;
     background-repeat: no-repeat;
@@ -12,7 +11,7 @@ body{
 
 .registration {
 	width: 650px;
-    height: 800px;
+    height:700px;
     background: #000;
     color: #fff;
     top: 70%;
